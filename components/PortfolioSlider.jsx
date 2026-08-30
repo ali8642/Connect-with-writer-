@@ -1,13 +1,13 @@
-/**
- * items: [{ title, author, genre, gradient }]
- * Displays a concise portfolio marquee of the supplied books.
- */
+import BookCover from "./BookCover";
+
 export default function PortfolioSlider({
   eyebrow,
   title,
   items,
   secondsPerItem = 4,
 }) {
+  // Doubling the items for a seamless loop
+  const marqueeItems = [...items, ...items];
   const duration = Math.max(items.length, 1) * secondsPerItem;
 
   return (
@@ -23,15 +23,15 @@ export default function PortfolioSlider({
           className="portfolio-marquee__track"
           style={{ "--marquee-duration": `${duration}s` }}
         >
-          {items.map((book) => (
-            <div className="slide" key={book.title}>
-              <div className="book" style={{ "--book-bg": book.gradient }}>
-                <div className="book__cover">
-                  <span className="book__genre">{book.genre}</span>
-                  <span className="book__title">{book.title}</span>
-                  <span className="book__author">{book.author}</span>
-                </div>
-              </div>
+          {marqueeItems.map((book, i) => (
+            <div className="slide" key={`${book.title}-${i}`}>
+              <BookCover
+                author={book.author}
+                className="book--sm"
+                genre={book.genre}
+                gradient={book.gradient}
+                title={book.title}
+              />
               <span>
                 {book.title}
                 <small>{book.genre}</small>

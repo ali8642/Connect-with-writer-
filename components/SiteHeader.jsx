@@ -105,6 +105,7 @@ export default function SiteHeader({ isLoggedIn = false }) {
             ref={navRef}
           >
             <Link
+              aria-expanded={isServicesOpen}
               aria-current={isServicesActive ? "page" : undefined}
               href="/services"
               onClick={(e) => {
@@ -120,18 +121,23 @@ export default function SiteHeader({ isLoggedIn = false }) {
               </svg>
             </Link>
             <div className="nav-dropdown">
-              {SERVICE_LINKS.map((s) => (
-                <Link
-                  aria-current={pathname === s.href ? "page" : undefined}
-                  href={s.href}
-                  key={s.href}
-                >
-                  <svg>
-                    <use href={`#${s.icon}`}></use>
-                  </svg>
-                  {s.label}
-                </Link>
-              ))}
+              <div className="container nav-dropdown__inner">
+                <p className="nav-dropdown__eyebrow">Services</p>
+                <div className="nav-dropdown__grid">
+                  {SERVICE_LINKS.map((s) => (
+                    <Link
+                      aria-current={pathname === s.href ? "page" : undefined}
+                      href={s.href}
+                      key={s.href}
+                    >
+                      <svg>
+                        <use href={`#${s.icon}`}></use>
+                      </svg>
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -141,7 +147,9 @@ export default function SiteHeader({ isLoggedIn = false }) {
           >
             Case Studies
           </Link>
-          <Link href={pathname === "/" ? "#blog" : "/#blog"}>Blog</Link>
+          <Link aria-current={pathname === "/blog" ? "page" : undefined} href="/blog">
+            Blog
+          </Link>
           <Link
             aria-current={pathname === "/contact" ? "page" : undefined}
             href="/contact"
