@@ -2,6 +2,20 @@ import PortfolioSlider from "@/components/PortfolioSlider";
 import ReviewsSlider from "@/components/ReviewsSlider";
 import FaqAccordion from "@/components/FaqAccordion";
 import ContactForm from "@/components/ContactForm";
+import BookCover from "@/components/BookCover";
+import Link from "next/link";
+import { getBlogPostBySlug } from "@/lib/blog/posts";
+
+const BLOG_SLUGS = ["how-to-revise-a-manuscript", "how-to-choose-a-ghostwriter", "book-outline-template"];
+const BLOG_ICONS = ["i-edit", "i-search", "i-refresh"];
+
+function formatDate(iso) {
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
 
 const PORTFOLIO_BOOKS = [
   { title: "Second Draft", author: "M. Reyes", genre: "Fiction", gradient: "linear-gradient(155deg,#202c3a,#0d141d)" },
@@ -47,15 +61,8 @@ export default function Page() {
         <a href="#portfolio" className="btn btn--ghost-dark">See Our Work</a>
       </div>
       <div className="hero-trust">
-        <div className="avatar-stack" aria-hidden="true">
-          <span style={{background: "var(--orange)"}}>JM</span>
-          <span style={{background: "var(--ink)"}}>AK</span>
-          <span style={{background: "var(--orange-deep)"}}>RT</span>
-          <span style={{background: "var(--orange-dark)"}}>+250</span>
-        </div>
         <p className="hero-trust-text">
-          <span className="stars" aria-hidden="true"><svg><use href="#i-star"></use></svg><svg><use href="#i-star"></use></svg><svg><use href="#i-star"></use></svg><svg><use href="#i-star"></use></svg><svg><use href="#i-star"></use></svg></span>
-          <strong>4.9 / 5 average rating</strong>from 250+ authors we&apos;ve worked with
+          <strong>Developmental, line &amp; copy editing</strong>Genre-matched editors for fiction and nonfiction
         </p>
       </div>
     </div>
@@ -66,24 +73,24 @@ export default function Page() {
         <div className="hero-art__book" aria-hidden="true">
           <svg><use href="#i-edit" style={{color: "var(--orange-dark)"}}></use></svg>
         </div>
-        <div className="float-card float-card--1"><svg><use href="#i-book-open"></use></svg><span>400+<small>Manuscripts Edited</small></span></div>
-        <div className="float-card float-card--2"><svg><use href="#i-star"></use></svg><span>4.9/5<small>Client Rating</small></span></div>
-        <div className="float-card float-card--3"><svg><use href="#i-shield"></use></svg><span>100%<small>Voice Preserved</small></span></div>
+        <div className="float-card float-card--1"><svg><use href="#i-book-open"></use></svg><span>Editorial Letter<small>Detailed, actionable notes</small></span></div>
+        <div className="float-card float-card--2"><svg><use href="#i-edit"></use></svg><span>Track Changes<small>Accept or reject every note</small></span></div>
+        <div className="float-card float-card--3"><svg><use href="#i-shield"></use></svg><span>Your Voice<small>Strengthened, never replaced</small></span></div>
       </div>
     </div>
   </div>
 </section>
 
-{/*============================ FOLD 1 — Proof stats strip ============================ */}
+{/*============================ FOLD 1 — Trust strip ============================ */}
 <section className="press">
   <div className="container">
-    <p className="press__label">Book Editing By The Numbers</p>
+    <p className="press__label">Why Authors Edit With Us</p>
     <div className="press__row">
-      <span>400+ Manuscripts Edited</span>
-      <span>20+ Genres Covered</span>
-      <span>4.9/5 Average Rating</span>
-      <span>2 Rounds Included Standard</span>
-      <span>12+ Yrs Editorial Experience</span>
+      <span>Genre-Matched Editors</span>
+      <span>Developmental to Copyediting</span>
+      <span>Editorial Letter Included</span>
+      <span>Track-Changes Delivery</span>
+      <span>Debrief Call Before Revisions</span>
     </div>
   </div>
 </section>
@@ -92,13 +99,13 @@ export default function Page() {
 <section className="section" id="intro">
   <div className="container split">
     <div className="split-art">
-      <div className="book book--lg" style={{"--book-bg": "linear-gradient(155deg,#202c3a,#0d141d)"}}>
-        <div className="book__cover">
-          <span className="book__genre">Fiction</span>
-          <span className="book__title">Second Draft</span>
-          <span className="book__author">M. Reyes</span>
-        </div>
-      </div>
+      <BookCover
+        className="book--lg"
+        genre="Fiction"
+        title="Second Draft"
+        author="M. Reyes"
+        gradient="linear-gradient(155deg,#202c3a,#0d141d)"
+      />
     </div>
     <div className="split-copy">
       <p className="eyebrow">Hire An Editor</p>
@@ -158,7 +165,7 @@ export default function Page() {
   <div className="container">
     <div className="cta-banner reveal">
       <div className="cta-banner__copy">
-        <h2>Join 400+ Authors Who&apos;ve Sharpened Their Manuscript With Us</h2>
+        <h2>Join the Authors Who&apos;ve Sharpened Their Manuscript With Us</h2>
         <p>Book a free manuscript assessment and we&apos;ll tell you honestly what level of editing your draft actually needs.</p>
         <a href="#contact" className="btn btn--primary">Book Your Free Assessment <svg><use href="#i-arrow-right"></use></svg></a>
       </div>
@@ -241,8 +248,8 @@ export default function Page() {
       </div>
 
       <div className="feature-books" aria-hidden="true">
-        <div className="book" style={{"--book-bg": "linear-gradient(155deg,#202c3a,#0d141d)"}}><div className="book__cover"><span className="book__genre">Fiction</span><span className="book__title">Before & After</span><span className="book__author">Connect with Writer</span></div></div>
-        <div className="book" style={{"--book-bg": "linear-gradient(155deg,#4a3a1d,#241c0d)"}}><div className="book__cover"><span className="book__genre">Nonfiction</span><span className="book__title">Clarity, Delivered</span><span className="book__author">Connect with Writer</span></div></div>
+        <BookCover genre="Fiction" title="Before & After" author="Connect with Writer" gradient="linear-gradient(155deg,#202c3a,#0d141d)" />
+        <BookCover genre="Business" title="Clarity, Delivered" author="Connect with Writer" gradient="linear-gradient(155deg,#4a3a1d,#241c0d)" />
       </div>
 
       <div className="feature-col right">
@@ -272,11 +279,11 @@ export default function Page() {
       </div>
     </div>
 
-    <div className="collage" aria-hidden="true">
-      <div className="collage-card"><svg><use href="#i-book-open"></use></svg><strong>400+</strong><span>Manuscripts Edited</span></div>
-      <div className="collage-card"><svg><use href="#i-star"></use></svg><strong>4.9/5</strong><span>Average Client Rating</span></div>
-      <div className="collage-card play"><span className="play-btn"><svg><use href="#i-play"></use></svg></span><span>See how it works</span></div>
-      <div className="collage-card"><svg><use href="#i-clock"></use></svg><strong>100%</strong><span>On-Time Delivery</span></div>
+    <div className="collage">
+      <Link className="collage-card" href="/case-studies"><svg><use href="#i-book-open"></use></svg><strong>Our Work</strong><span>See edited books in the case studies</span></Link>
+      <div className="collage-card"><svg><use href="#i-edit"></use></svg><strong>Note by Note</strong><span>Track-changes edits you control</span></div>
+      <Link className="collage-card play" href="/case-studies"><span className="play-btn" aria-hidden="true"><svg><use href="#i-play"></use></svg></span><span>See how it works</span></Link>
+      <div className="collage-card"><svg><use href="#i-shield"></use></svg><strong>Confidential</strong><span>NDA on every project</span></div>
     </div>
   </div>
 </section>
@@ -296,11 +303,11 @@ export default function Page() {
         </div>
       </div>
       <div className="cta2-collage" aria-hidden="true">
-        <div className="book" style={{"--book-bg": "linear-gradient(155deg,#202c3a,#0d141d)"}}><div className="book__cover"><span className="book__title">Fiction</span></div></div>
-        <div className="book" style={{"--book-bg": "linear-gradient(155deg,#4a3a1d,#241c0d)"}}><div className="book__cover"><span className="book__title">Business</span></div></div>
-        <div className="book" style={{"--book-bg": "linear-gradient(155deg,#5a2a2a,#280f0f)"}}><div className="book__cover"><span className="book__title">Thriller</span></div></div>
-        <div className="book" style={{"--book-bg": "linear-gradient(155deg,#1d3a4a,#0d1c24)"}}><div className="book__cover"><span className="book__title">Memoir</span></div></div>
-        <div className="book" style={{"--book-bg": "linear-gradient(155deg,#2c2438,#13101c)"}}><div className="book__cover"><span className="book__title">YA</span></div></div>
+        <BookCover className="book--sm" genre="Fiction" title="Fiction" gradient="linear-gradient(155deg,#202c3a,#0d141d)" />
+        <BookCover className="book--sm" genre="Business" title="Business" gradient="linear-gradient(155deg,#4a3a1d,#241c0d)" />
+        <BookCover className="book--sm" genre="Thriller" title="Thriller" gradient="linear-gradient(155deg,#5a2a2a,#280f0f)" />
+        <BookCover className="book--sm" genre="Memoir" title="Memoir" gradient="linear-gradient(155deg,#1d3a4a,#0d1c24)" />
+        <BookCover className="book--sm" genre="Romance" title="YA" gradient="linear-gradient(155deg,#2c2438,#13101c)" />
       </div>
     </div>
   </div>
@@ -329,33 +336,26 @@ export default function Page() {
       <h2>Resources for Authors &amp; First-Time Writers</h2>
     </div>
     <div className="blog-grid">
-      <article className="blog-card">
-        <div className="blog-card__media" style={{background: "var(--orange-tint)"}}><svg style={{color: "var(--orange-deep)"}}><use href="#i-edit"></use></svg></div>
-        <div className="blog-card__body">
-          <span className="blog-tag">Editing</span>
-          <h3><a href="#blog">Developmental Edit vs. Line Edit: Which Does Your Manuscript Need?</a></h3>
-          <p>Understanding the difference can save you months of revising the wrong thing first.</p>
-          <div className="blog-meta"><span>June 9, 2026</span><a className="read-more" href="#blog">Read More <svg><use href="#i-arrow-right"></use></svg></a></div>
-        </div>
-      </article>
-      <article className="blog-card">
-        <div className="blog-card__media" style={{background: "var(--cream-deep)"}}><svg style={{color: "var(--orange-deep)"}}><use href="#i-search"></use></svg></div>
-        <div className="blog-card__body">
-          <span className="blog-tag">Writing Tips</span>
-          <h3><a href="#blog">5 Signs Your Manuscript Is Ready for a Professional Editor</a></h3>
-          <p>How to tell when self-editing has hit its ceiling and it&apos;s time to bring in a second set of eyes.</p>
-          <div className="blog-meta"><span>May 26, 2026</span><a className="read-more" href="#blog">Read More <svg><use href="#i-arrow-right"></use></svg></a></div>
-        </div>
-      </article>
-      <article className="blog-card">
-        <div className="blog-card__media" style={{background: "var(--orange-tint)"}}><svg style={{color: "var(--orange-deep)"}}><use href="#i-refresh"></use></svg></div>
-        <div className="blog-card__body">
-          <span className="blog-tag">Revisions</span>
-          <h3><a href="#blog">How to Take Editorial Feedback Without Losing Momentum</a></h3>
-          <p>A practical approach to reading tough notes and turning them into your next, stronger draft.</p>
-          <div className="blog-meta"><span>May 11, 2026</span><a className="read-more" href="#blog">Read More <svg><use href="#i-arrow-right"></use></svg></a></div>
-        </div>
-      </article>
+      {BLOG_SLUGS.map((slug, i) => {
+        const post = getBlogPostBySlug(slug);
+        if (!post) return null;
+        return (
+          <article className="blog-card" key={post.slug}>
+            <div className="blog-card__media" style={{ background: i % 2 ? "var(--cream-deep)" : "var(--orange-tint)" }}>
+              <svg style={{ color: "var(--orange-deep)" }}><use href={`#${BLOG_ICONS[i]}`}></use></svg>
+            </div>
+            <div className="blog-card__body">
+              <span className="blog-tag">{post.category}</span>
+              <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+              <p>{post.excerpt}</p>
+              <div className="blog-meta">
+                <span>{formatDate(post.date)}</span>
+                <Link className="read-more" href={`/blog/${post.slug}`}>Read More <svg><use href="#i-arrow-right"></use></svg></Link>
+              </div>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -368,11 +368,11 @@ export default function Page() {
       <p className="eyebrow">Let&apos;s Sharpen Your Draft</p>
       <h2>Your Manuscript Deserves a Second Set of Eyes.</h2>
       <p className="lede">You&apos;ve done the hardest part already — you finished a draft. Let&apos;s talk about what it needs to become the book you set out to write.</p>
-      <div className="final-books" aria-hidden="true">
-        <div className="book book--sm" style={{"--book-bg": "linear-gradient(155deg,#202c3a,#0d141d)"}}><div className="book__cover"><span className="book__title">Fiction</span></div></div>
-        <div className="book book--sm" style={{"--book-bg": "linear-gradient(155deg,#4a3a1d,#241c0d)"}}><div className="book__cover"><span className="book__title">Nonfiction</span></div></div>
-        <div className="book book--sm" style={{"--book-bg": "linear-gradient(155deg,#5a2a2a,#280f0f)"}}><div className="book__cover"><span className="book__title">Thriller</span></div></div>
-      </div>
+    <div className="final-books" aria-hidden="true">
+      <BookCover className="book--sm" genre="Fiction" title="Fiction" gradient="linear-gradient(155deg,#202c3a,#0d141d)" />
+      <BookCover className="book--sm" genre="Business" title="Nonfiction" gradient="linear-gradient(155deg,#4a3a1d,#241c0d)" />
+      <BookCover className="book--sm" genre="Thriller" title="Thriller" gradient="linear-gradient(155deg,#5a2a2a,#280f0f)" />
+    </div>
     </div>
     <div className="form-card reveal">
       <ContactForm heading={"Tell Us About Your Manuscript"} blurb={"Share a few details and an editor will reach out within one business day with next steps."} />

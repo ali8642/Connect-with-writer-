@@ -1,3 +1,4 @@
+import Link from "next/link";
 import PortfolioSlider from "@/components/PortfolioSlider";
 import ReviewsSlider from "@/components/ReviewsSlider";
 import FaqAccordion from "@/components/FaqAccordion";
@@ -44,18 +45,11 @@ export default function Page() {
       <p className="lede">Our illustrators design characters, build full-spread scenes, and paint covers that match your story&apos;s tone and age band — turning your manuscript into a book kids actually want to hold.</p>
       <div className="cta-row">
         <a href="#contact" className="btn btn--primary">Get a Free Illustration Quote <svg><use href="#i-arrow-right"></use></svg></a>
-        <a href="#portfolio" className="btn btn--ghost-dark">See Our Work</a>
+        <Link href="/case-studies" className="btn btn--ghost-dark">See Our Work</Link>
       </div>
       <div className="hero-trust">
-        <div className="avatar-stack" aria-hidden="true">
-          <span style={{background: "var(--orange)"}}>JM</span>
-          <span style={{background: "var(--ink)"}}>AK</span>
-          <span style={{background: "var(--orange-deep)"}}>RT</span>
-          <span style={{background: "var(--orange-dark)"}}>+250</span>
-        </div>
         <p className="hero-trust-text">
-          <span className="stars" aria-hidden="true"><svg><use href="#i-star"></use></svg><svg><use href="#i-star"></use></svg><svg><use href="#i-star"></use></svg><svg><use href="#i-star"></use></svg><svg><use href="#i-star"></use></svg></span>
-          <strong>4.9 / 5 average rating</strong>from 250+ authors we&apos;ve worked with
+          <strong>Original character &amp; scene art</strong>Covers, full spreads, and series bibles
         </p>
       </div>
     </div>
@@ -66,8 +60,8 @@ export default function Page() {
         <div className="hero-art__book" aria-hidden="true">
           <svg><use href="#i-palette" style={{color: "var(--orange-dark)"}}></use></svg>
         </div>
-        <div className="float-card float-card--1"><svg><use href="#i-palette"></use></svg><span>150+<small>Books Illustrated</small></span></div>
-        <div className="float-card float-card--2"><svg><use href="#i-star"></use></svg><span>4.9/5<small>Client Rating</small></span></div>
+        <div className="float-card float-card--1"><svg><use href="#i-palette"></use></svg><span>Full Spreads<small>Characters, scenes &amp; covers</small></span></div>
+        <div className="float-card float-card--2"><svg><use href="#i-heart"></use></svg><span>Kid-Tested<small>Art that holds young attention</small></span></div>
         <div className="float-card float-card--3"><svg><use href="#i-shield"></use></svg><span>100%<small>Custom Character Art</small></span></div>
       </div>
     </div>
@@ -77,13 +71,13 @@ export default function Page() {
 {/*============================ FOLD 1 — Proof stats strip ============================ */}
 <section className="press">
   <div className="container">
-    <p className="press__label">Illustration By The Numbers</p>
+    <p className="press__label">Why Authors Illustrate With Us</p>
     <div className="press__row">
-      <span>150+ Books Illustrated</span>
-      <span>20+ Illustration Styles</span>
-      <span>4.9/5 Average Rating</span>
+      <span>Character-First Workflow</span>
+      <span>Style Matched To Your Story</span>
+      <span>Full-Spread Consistency</span>
+      <span>Print-Ready File Delivery</span>
       <span>100% Custom, Original Art</span>
-      <span>8+ Yrs Illustration Experience</span>
     </div>
   </div>
 </section>
@@ -158,7 +152,7 @@ export default function Page() {
   <div className="container">
     <div className="cta-banner reveal">
       <div className="cta-banner__copy">
-        <h2>Join 150+ Authors Whose Stories We&apos;ve Illustrated</h2>
+        <h2>Let&apos;s Bring Your Story&apos;s Characters to Life</h2>
         <p>Book a free illustration consultation and get a custom quote based on your story&apos;s length and style.</p>
         <a href="#contact" className="btn btn--primary">Get My Free Quote <svg><use href="#i-arrow-right"></use></svg></a>
       </div>
@@ -272,11 +266,11 @@ export default function Page() {
       </div>
     </div>
 
-    <div className="collage" aria-hidden="true">
-      <div className="collage-card"><svg><use href="#i-palette"></use></svg><strong>150+</strong><span>Books Illustrated</span></div>
-      <div className="collage-card"><svg><use href="#i-star"></use></svg><strong>4.9/5</strong><span>Average Client Rating</span></div>
-      <div className="collage-card play"><span className="play-btn"><svg><use href="#i-play"></use></svg></span><span>See how it works</span></div>
-      <div className="collage-card"><svg><use href="#i-clock"></use></svg><strong>100%</strong><span>On-Time Delivery</span></div>
+    <div className="collage">
+      <Link className="collage-card" href="/case-studies"><svg><use href="#i-palette"></use></svg><strong>Our Work</strong><span>See illustrated books in the case studies</span></Link>
+      <div className="collage-card"><svg><use href="#i-heart"></use></svg><strong>Character First</strong><span>Design locked in before full spreads</span></div>
+      <Link className="collage-card play" href="/case-studies"><span className="play-btn" aria-hidden="true"><svg><use href="#i-play"></use></svg></span><span>See how it works</span></Link>
+      <div className="collage-card"><svg><use href="#i-shield"></use></svg><strong>100% Yours</strong><span>You keep all illustration rights</span></div>
     </div>
   </div>
 </section>
@@ -292,7 +286,7 @@ export default function Page() {
         <p>Tell us about your story today and we&apos;ll send a custom illustration quote based on length, style, and age band.</p>
         <div className="cta-row">
           <a href="#contact" className="btn btn--primary">Get My Free Quote <svg><use href="#i-arrow-right"></use></svg></a>
-          <a href="#portfolio" className="btn btn--ghost-light">View Our Portfolio</a>
+          <Link href="/case-studies" className="btn btn--ghost-light">View Our Portfolio</Link>
         </div>
       </div>
       <div className="cta2-collage" aria-hidden="true">
@@ -333,27 +327,27 @@ export default function Page() {
         <div className="blog-card__media" style={{background: "var(--orange-tint)"}}><svg style={{color: "var(--orange-deep)"}}><use href="#i-palette"></use></svg></div>
         <div className="blog-card__body">
           <span className="blog-tag">Illustration</span>
-          <h3><a href="#blog">How Character Design Sketches Shape an Entire Picture Book</a></h3>
+          <h3><Link href="/blog/how-to-choose-a-ghostwriter">How Character Design Sketches Shape an Entire Picture Book</Link></h3>
           <p>Why the first few sketches of your protagonist matter more than any single full-spread illustration.</p>
-          <div className="blog-meta"><span>June 22, 2026</span><a className="read-more" href="#blog">Read More <svg><use href="#i-arrow-right"></use></svg></a></div>
+          <div className="blog-meta"><span>June 22, 2026</span><Link className="read-more" href="/blog/how-to-choose-a-ghostwriter">Read More <svg><use href="#i-arrow-right"></use></svg></Link></div>
         </div>
       </article>
       <article className="blog-card">
         <div className="blog-card__media" style={{background: "var(--cream-deep)"}}><svg style={{color: "var(--orange-deep)"}}><use href="#i-heart"></use></svg></div>
         <div className="blog-card__body">
           <span className="blog-tag">Style Guide</span>
-          <h3><a href="#blog">Watercolor, Digital, or Classic Storybook: Choosing Your Illustration Style</a></h3>
+          <h3><Link href="/blog/self-publishing-vs-traditional">Watercolor, Digital, or Classic Storybook: Choosing Your Illustration Style</Link></h3>
           <p>A practical breakdown of popular children&apos;s illustration styles and which stories they suit best.</p>
-          <div className="blog-meta"><span>June 5, 2026</span><a className="read-more" href="#blog">Read More <svg><use href="#i-arrow-right"></use></svg></a></div>
+          <div className="blog-meta"><span>June 5, 2026</span><Link className="read-more" href="/blog/self-publishing-vs-traditional">Read More <svg><use href="#i-arrow-right"></use></svg></Link></div>
         </div>
       </article>
       <article className="blog-card">
         <div className="blog-card__media" style={{background: "var(--orange-tint)"}}><svg style={{color: "var(--orange-deep)"}}><use href="#i-book-open"></use></svg></div>
         <div className="blog-card__body">
           <span className="blog-tag">Publishing</span>
-          <h3><a href="#blog">How Text and Illustration Should Actually Work Together on a Page</a></h3>
+          <h3><Link href="/blog/book-outline-template">How Text and Illustration Should Actually Work Together on a Page</Link></h3>
           <p>The best picture books treat text and art as one unit, not two separate elements — here&apos;s how.</p>
-          <div className="blog-meta"><span>May 24, 2026</span><a className="read-more" href="#blog">Read More <svg><use href="#i-arrow-right"></use></svg></a></div>
+          <div className="blog-meta"><span>May 24, 2026</span><Link className="read-more" href="/blog/book-outline-template">Read More <svg><use href="#i-arrow-right"></use></svg></Link></div>
         </div>
       </article>
     </div>
